@@ -55,15 +55,26 @@ function App() {
     const curr = parseFloat(currentInput);
     const result = curr / 100;
     setCurrentInput(result.toString());
+    setpreviousInput(null);
+    setOperation(null);
   };
-  const handleDecimal = () => {};
+  const handleDecimal = () => {
+    if (!currentInput.includes(".")) {
+      setCurrentInput(currentInput + ".");
+    }
+  };
+  const handleNegativePositive = () => {
+    if (!currentInput.includes("-")) {
+      setCurrentInput("-" + currentInput);
+    }
+  };
   return (
     <div className="App">
       <div className="button-container">
         <div className="calculator-display">{currentInput || "0"}</div>
         <div>
           <Button handleClick={handleClear} value="C" red />
-          <Button value="-/+" />
+          <Button handleClick={handleNegativePositive} value="-/+" orange />
           <Button handleClick={handlePercentage} value="%" orange />
           <Button handleClick={handleOperator} value="/" orange />
         </div>
