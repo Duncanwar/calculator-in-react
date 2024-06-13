@@ -34,6 +34,11 @@ function App() {
         if (curr === 0) result = "Error: Division by zero";
         else result = prev / curr;
         break;
+      case "%":
+        console.log(curr, prev);
+        if (curr === 0) return 0;
+        else result = curr / 100;
+        break;
       default:
         result = "Error";
     }
@@ -46,27 +51,45 @@ function App() {
     setpreviousInput("");
     setOperation(null);
   };
+  const handlePercentage = () => {
+    const curr = parseFloat(currentInput);
+    const result = curr / 100;
+    setCurrentInput(result.toString());
+  };
+  const handleDecimal = () => {};
   return (
     <div className="App">
-      <div className="calculator-display">{currentInput || "0"}</div>
       <div className="button-container">
-        <Button handleClick={handleNumber} value="7" />
-        <Button handleClick={handleNumber} value="8" />
-        <Button handleClick={handleNumber} value="9" />
-        <Button handleClick={handleOperator} value="/" orange />
-        <Button handleClick={handleNumber} value="4" />
-        <Button handleClick={handleNumber} value="5" />
-        <Button handleClick={handleNumber} value="6" />
-        <Button handleClick={handleOperator} value="*" orange />
-        <Button handleClick={handleNumber} value="1" />
-        <Button handleClick={handleNumber} value="2" />
-        <Button handleClick={handleNumber} value="3" />
-        <Button handleClick={handleOperator} value="-" orange />
-        <Button handleClick={handleClear} value="C" red />
-        <Button handleClick={handleNumber} value="0" />
-        {/* <Button handleClick={handleDecimal} value="." /> */}
-        <Button handleClick={handleOperator} value="+" orange />
-        <Button handleClick={handleCalculate} value="=" green />
+        <div className="calculator-display">{currentInput || "0"}</div>
+        <div>
+          <Button handleClick={handleClear} value="C" red />
+          <Button value="-/+" />
+          <Button handleClick={handlePercentage} value="%" orange />
+          <Button handleClick={handleOperator} value="/" orange />
+        </div>
+        <div>
+          <Button handleClick={handleNumber} value="7" />
+          <Button handleClick={handleNumber} value="8" />
+          <Button handleClick={handleNumber} value="9" />
+          <Button handleClick={handleOperator} value="*" orange />
+        </div>
+        <div>
+          <Button handleClick={handleNumber} value="4" />
+          <Button handleClick={handleNumber} value="5" />
+          <Button handleClick={handleNumber} value="6" />
+          <Button handleClick={handleOperator} value="-" orange />
+        </div>
+        <div>
+          <Button handleClick={handleNumber} value="1" />
+          <Button handleClick={handleNumber} value="2" />
+          <Button handleClick={handleNumber} value="3" />
+          <Button handleClick={handleOperator} value="+" orange />
+        </div>
+        <div>
+          <Button handleClick={handleNumber} value="0" />
+          <Button handleClick={handleDecimal} value="." />
+          <Button handleClick={handleCalculate} value="=" green />
+        </div>
       </div>
     </div>
   );
